@@ -1,0 +1,544 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    position: relative;
+    height: 70vh;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('../images/bg.jpg');
+    background-size: 50% 100%;
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    z-index: -2;
+}
+
+.dashboard::after {
+    content: '';
+    position: absolute;
+    background-image: url('../images/pastor.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.devotion-container {
+    position: absolute;
+    bottom: 50px;
+    left: 10%;
+    text-align: left;
+}
+
+.devotion-header {
+    font-size: 14px;
+    font-weight: bold;
+    color: #b49979;
+    margin-bottom: 5px;
+}
+
+.devotion-button {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, red, white);
+    border: none;
+    border-radius: 10px;
+    padding: 20px 80px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 400px;
+}
+
+.devotion-button:hover {
+    background: linear-gradient(to right, #ff4b4b, #ff7e7e);
+}
+
+.devotion-text {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.arrow {
+    font-size: 24px;
+}
+
+.left-container {
+    position: absolute;
+    top: -10px;
+    left: -200px;
+    text-align: center;
+}
+
+.great-image {
+    width: 1000px;
+    height: auto;
+}
+
+.church-name {
+    margin-top: -150px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #b49979;
+    position: relative;
+    left: 150px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard, .devotion-container, .left-container, .devotion-button, .church-name {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.daily-devotion {
+    margin: 0 20px 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-size: cover;
+    background-position: center;
+    animation: slideIn 1s ease-in-out;
+}
+
+.daily-devotion h2 {
+    color: #b49979;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.daily-devotion p {
+    color: #333;
+    font-size: 16px;
+}
+
+.devotion-banner {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    display: block;
+    margin: 0 auto;
+    height: 150px;
+    object-fit: cover;
+    position: relative;
+}
+
+.banner-text {
+    position: absolute;
+    margin-top: -70px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 15px;
+    border-radius: 5px;
+    width: 180%;
+    text-align: center;
+}
+
+.devotion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 60px;
+}
+
+.devotion-form label {
+    font-weight: bold;
+    color: #b49979;
+}
+
+.devotion-form input,
+.devotion-form textarea {
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 20px;
+    color: black;
+}
+
+.devotion-form input:focus,
+.devotion-form textarea:focus {
+    border-color: #007BFF;
+    color: #007BFF;
+    outline: none;
+}
+
+.devotion-form input::placeholder,
+.devotion-form textarea::placeholder {
+    color: black;
+}
+
+.devotion-form button {
+    padding: 18px;
+    background-color: #b49979;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.devotion-form button:hover {
+    background-color: #7b634d;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.animate {
+    animation: slideIn 1s ease-in-out;
+}
+
+/* Success Modal Styles */
+#successModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background: #ffffff !important;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
+
+.success-icon {
+    width: 50px;
+    height: 50px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.success-icon svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+
+.modal-content h3 {
+    color: #333;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Large Screens (1200px and above) */
+@media (min-width: 1200px) {
+    .dashboard {
+        height: 70vh;
+    }
+
+    .dashboard::after {
+        bottom: -1440px;
+        right: -250px;
+        width: 1000px;
+        height: 2000px;
+    }
+
+    .devotion-container {
+        bottom: 50px;
+        left: 10%;
+    }
+
+    .devotion-button {
+        padding: 20px 80px;
+        width: 400px;
+    }
+
+    .left-container {
+        top: -100px;
+        left: -250px;
+    }
+
+    .great-image {
+        width: 1000px;
+    }
+    
+    .church-name {
+        margin-top: -150px;
+        font-size: 32px;
+        left: 100px;
+    }
+    .banner-text {
+      
+        width: 92%;
+        top: 101%;
+        
+    }
+}
+
+/* Tablets (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .dashboard {
+        height: auto;
+        min-height: 60vh;
+        padding: 20px;
+        overflow: hidden;
+    }
+    
+    .dashboard::before {
+        background-size: 100% 100%;
+        background-position: right center;
+        opacity: 0.9;
+    }
+    
+    .left-container {
+        position: relative;
+        top: 0;
+        left: -250px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .great-image {
+        width: 600px;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    .church-name {
+        margin-top: -80px;
+        font-size: 28px;
+        position: relative;
+        text-align: center;
+        left: 50px;
+    }
+
+    .devotion-container {
+        bottom: 40px;
+        left: 5%;
+    }
+
+    .devotion-button {
+        padding: 12px 40px;
+        width: 250px;
+        font-size: 14px;
+    }
+
+    .devotion-text {
+        font-size: 18px;
+    }
+
+    .dashboard::after {
+        content: '';
+        position: absolute;
+        top: 100px;
+        right: -150px;
+        width: 700px;
+        height: 1400px;
+        background-image: url('../images/pastor.png');
+        background-size: contain;
+        background-position: top right;
+        background-repeat: no-repeat;
+        opacity: 0.9;
+        z-index: 1;
+    }
+
+    .banner-text {
+        font-size: 34px;
+        width: 86%;
+        top: 85%;
+    }
+}
+
+
+@media (max-width: 425px) {
+    .dashboard {
+        height: 70vh;
+        min-height: 50vh;
+        padding: 10px;
+        position: relative;
+    }
+
+    .dashboard::before {
+        background-size: 80% 100%;
+        background-position: 0% center;
+        opacity: 0.7;
+        width: 200%;
+        left: 0;
+        right: 0;
+    }
+
+    .left-container {
+        position: relative;
+        top: -30px;
+        left: -80px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .great-image {
+        width: 480px;
+        max-width: 100%;
+        height: 300px;
+        margin-top: 100px;
+    }
+
+    .church-name {
+        margin-top: -70px;
+        font-size: 21px;
+        left: 80px;
+        white-space: nowrap;
+    }
+
+    .devotion-container {
+        position: absolute;
+        bottom: 100px;
+        left: 100px;
+        width: auto;
+        display: block;
+    }
+
+    .devotion-button {
+        padding: 8px 20px;
+        width: 280px;
+        font-size: 12px;
+    }
+
+    .devotion-text {
+        font-size: 14px;
+    }
+
+    .dashboard::after {
+        display: none;
+    }
+    
+    .banner-text {
+        top: 105%;
+        width: 75%;
+    }
+}
+@media (max-width: 375px) {
+    .left-container {
+        position: relative;
+        top: -30px;
+        left: -60px;
+        width: 100%;
+        overflow: visible;
+    }
+
+    .great-image {
+        width: 550px;
+        max-width: 300%;
+        height: auto;
+        margin-top: 80px;
+        margin-left: -150px;
+    }
+
+    .church-name {
+        margin-top: -70px;
+        font-size: 19px;
+        left: 30px;
+        white-space: nowrap;
+    }
+
+    .devotion-container {
+        position: absolute;
+        bottom: 100px;
+        left: 50px;
+        width: auto;
+        display: block;
+    }
+
+    .devotion-button {
+        padding: 8px 20px;
+        width: 250px;
+        font-size: 12px;
+    }
+    .banner-text{
+        width: 70%;
+    }   @media (max-width: 320px) {
+   }
+
+    .banner-text{
+        width: 67%;
+       margin-top: 30px;
+
+   
+}
+
+    }

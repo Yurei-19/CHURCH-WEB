@@ -1,0 +1,580 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    animation: gradientBG 15s ease infinite;
+}   
+
+.register-container {
+    background-color: rgba(140, 115, 89, 0.8);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    min-height: 500px;
+    text-align: center;
+    padding-top: 60px;
+    animation: fadeIn 0.2s ease-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 15px;
+    text-align: left;
+    margin-top: 30px;
+    opacity: 0;
+    animation: fadeIn 0.15s ease-out forwards;
+}
+
+.form-group:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.form-group:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.form-group:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    height: 50px;
+    font-size: 18px;
+    background-color: transparent;
+    color: white;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: white;
+}
+
+.sign-in-button {
+    background-color: #725940;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    margin-bottom: 30px;
+    display: block;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 0.15s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.sign-in-button:hover {
+    background-color: rgba(114, 89, 64, 0.5);
+}
+
+p {
+    margin-top: 10px;
+    color: white;
+    opacity: 0;
+    animation: fadeIn 0.15s ease-out forwards;
+    animation-delay: 0.25s;
+}
+
+a {
+    color: burlywood;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+
+    /* CELLPHONE */ 
+} 
+@media (max-width: 480px) and (min-width: 360px) {
+    body {
+        padding: 10px;
+    }
+
+    .register-container {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        height: 45px;
+        font-size: 16px;
+    }
+
+    .sign-in-button {
+        height: 50px;
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+}
+
+.modal-content {
+    background-color: #dc3545;
+    padding: 20px 40px;
+    border-radius: 8px;
+    width: auto;
+    min-width: 300px;
+    position: relative;
+    text-align: center;
+    animation: slideDown 0.5s ease-out forwards;
+    transform: translateY(-50%);
+    margin: 0;
+    color: white;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(10%);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translateY(-5%);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-closing {
+    animation: slideUp 0.15s ease-in forwards !important;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover {
+    color: #ddd;
+}
+
+#modalMessage {
+    margin: 15px 0;
+    font-size: 16px;
+    color: white;
+    padding: 5px 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Add these notification styles */
+.notification {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    animation: slideInOut 1.2s ease-in-out forwards;
+}
+
+.notification.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.notification.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.notification i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Add if not already present */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2100;
+    animation: slideInOut 1.2s ease-in-out forwards;
+}
+
+.notification.success {
+    background-color: #28a745;
+    color: white;
+}
+
+.notification.error {
+    background-color: #dc3545;
+    color: white;
+}
+
+.notification i {
+    font-size: 20px;
+}
+
+@keyframes slideInOut {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    5% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    95% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Make modal animations faster */
+@keyframes modalPop {
+    0% {
+        transform: scale(0.98);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Large Screens (1200px and above) */
+@media (min-width: 1200px) {
+    .register-container {
+        width: 600px;
+        min-height: 600px;
+        padding: 40px;
+    }
+
+    h2 {
+        font-size: 2.2em;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        height: 55px;
+        font-size: 20px;
+    }
+
+    .sign-in-button {
+        height: 55px;
+        font-size: 18px;
+    }
+}
+
+/* Medium Screens (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .register-container {
+        width: 500px;
+        min-height: 500px;
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .sign-in-button {
+        height: 50px;
+        font-size: 16px;
+    }
+}
+
+/* Small Screens/Cellphones (below 768px) */
+@media (max-width: 767px) {
+    body {
+        padding: 10px;
+    }
+
+    .register-container {
+        width: 95%;
+        min-height: auto;
+        padding: 25px;
+        margin: 5px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        height: 55px;
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    .sign-in-button {
+        height: 55px;
+        font-size: 18px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .toggle-password {
+        font-size: 20px;
+        padding: 10px;
+    }
+}
+
+/* Extra Small Screens (below 360px) */
+@media (max-width: 359px) {
+    .register-container {
+        width: 98%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .sign-in-button {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+/* Update notification responsiveness */
+@media (max-width: 480px) {
+    .notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+/* Specific adjustments for 360 x 740 and similar sizes */
+@media (min-width: 360px) and (max-width: 380px) and (min-height: 700px) {
+    .register-container {
+        width: 340px;
+        min-height: 500px;
+        padding: 30px 20px;
+        margin: 20px auto;
+    }
+
+    h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+
+    .form-group {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        height: 60px;
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    .sign-in-button {
+        height: 60px;
+        font-size: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    p {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    .toggle-password {
+        font-size: 22px;
+        padding: 15px;
+        right: 15px;
+    }
+
+    /* Adjust notification for this size */
+    .notification {
+        width: 320px;
+        margin: 0 auto;
+        font-size: 15px;
+        padding: 15px;
+    }
+}
+
+/* Additional adjustments for portrait orientation */
+@media (max-width: 380px) and (orientation: portrait) {
+    body {
+        padding: 0;
+    }
+
+    .register-container {
+        border-radius: 0;
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+    }
+}

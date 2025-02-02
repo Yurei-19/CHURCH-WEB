@@ -1,0 +1,890 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    position: relative;
+    min-height: 100vh;
+    animation: fadeInPage 0.6s ease-in-out;
+}
+
+@keyframes fadeInPage {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.events-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    height: 100px;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.events-header h1 {
+    font-size: 36px;
+    color: #5a3e2b;
+}
+
+.events-header p {
+    color: #7b634d;
+}
+
+.events-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0;
+    padding: 20px;
+    padding-left: 100px;
+    margin-left: 0;
+}
+
+.event-card {
+    flex: 0 0 auto;
+    background-color: #333;
+    color: #fff;
+    border-radius: 10px;
+    width: 350px;
+    height: 250px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+    transform-origin: left;
+    scroll-snap-align: start;
+    margin: 0;
+    margin-left: -50px;
+    z-index: 1;
+    opacity: 0;
+    animation: cardAppear 0.6s ease-out forwards;
+}
+
+.event-card:nth-child(1) { animation-delay: 0.1s; }
+.event-card:nth-child(2) { animation-delay: 0.2s; }
+.event-card:nth-child(3) { animation-delay: 0.3s; }
+.event-card:nth-child(4) { animation-delay: 0.4s; }
+.event-card:nth-child(5) { animation-delay: 0.5s; }
+.event-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes cardAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    70% {
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.event-card:hover {
+    transform: rotateY(-15deg) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    z-index: 5;
+    width: 370px;
+    transition: all 0.3s ease;
+}
+
+.event-date {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    text-align: left;
+    color: #fff;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+    z-index: 3;
+}
+
+.event-date span {
+    font-size: 48px;
+    display: block;
+}
+
+.event-date small {
+    font-size: 16px;
+}
+
+.event-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.event-info h2, .event-info a {
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.event-info h2 {
+    margin: 40px 0;
+    font-size: 18px;
+}
+
+.event-info img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.event-info a {
+    color: #b49979;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 1;
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+}
+
+.event-info a:hover {
+    text-decoration: underline;
+}
+
+.add-event-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #5a3e2b;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+    animation-delay: 0.6s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    z-index: 999;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#eventForm {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    width: 40%;
+    height: 500px;
+    max-height: 95vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#eventForm form {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#eventForm input {
+    width: 80%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 16px;
+    color: black;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+#eventForm input:focus {
+    border-color: blue;
+    outline: none;
+    color: blue;
+}
+
+#eventForm button {
+    background-color: #5a3e2b;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 80%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#eventForm button:hover {
+    background-color: #7b634d;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1500;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: modalPop 0.3s ease-out forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.modal-content h2 {
+    color: #5a3e2b;
+    margin-bottom: 20px;
+    font-size: 24px;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-content p {
+    margin: 15px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.modal-content .event-date {
+    position: relative;
+    width: auto;
+    margin: 15px auto;
+    display: inline-block;
+}
+
+/* Add animation for modal */
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Style the close button (×) if you have one */
+.modal .close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.modal .close:hover {
+    color: #000;
+}
+
+/* Style the event title */
+.modal h2 {
+    color: #5a3e2b;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Style the event date */
+.modal .event-date {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+    position: static;
+    background: none;
+    padding: 0;
+    text-shadow: none;
+}
+
+.modal-content .button-container {
+    display: flex;
+    flex-direction: row;  /* horizontal layout */
+    gap: 20px;  /* space between buttons */
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.confirm-button, .cancel-button {
+    background-color: #5a3e2b;
+    color: white;
+    border: none;
+    padding: 10px 30px;  /* wider padding */
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;  /* remove margin */
+    width: 100px;  /* fixed width */
+    font-size: 16px;
+}
+
+.confirm-button:hover {
+    background-color: #7b634d;
+}
+
+.cancel-button {
+    background-color: #ccc;
+}
+
+.cancel-button:hover {
+    background-color: #aaa;
+}
+
+.event-card {
+    position: relative;
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 50px;
+    background-color: transparent;
+    width: 50px;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 1.2em;
+    z-index: 3;
+}
+
+.delete-button:hover {
+    color: darkred;
+}
+
+.search-container {
+    position: relative;
+    width: 35%;
+    right: 400px;
+    top: -100px;
+
+    animation: slideIn 0.5s ease-out;
+    animation-delay: 0.4s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#searchInput {
+    width: 60%;
+    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 220px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.scroll-right-button {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background-color: #5a3e2b;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 998;
+}
+
+.scroll-right-button:hover {
+    background-color: #7b634d;
+}
+
+#logoutModal {
+    z-index: 2000 !important;
+}
+
+/* Add padding to the event sections */
+h2 {
+    padding-left: 120px;
+}
+
+.success-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-modal .modal-content {
+    background: #ffffff !important;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 300px;
+    height: 150px;
+}
+
+.success-icon {
+    width: 50px;
+    height: 50px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.success-icon svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+
+.success-modal h3 {
+    color: #333;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Tablets (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .events-container {
+        padding-left: 100px;
+    }
+
+    /* Event card text adjustments */
+    .event-info h2 {
+        font-size: 16px; /* Reduced font size */
+        margin: 20px 0; /* Reduced margin */
+        line-height: 1.4; /* Added line height for better readability */
+    }
+
+    .event-date {
+        padding: 8px; /* Reduced padding */
+    }
+
+    .event-date span {
+        font-size: 36px; /* Reduced date size */
+    }
+
+    .event-date small {
+        font-size: 14px; /* Reduced month size */
+    }
+
+    .event-info a {
+        bottom: 10px; /* Adjusted link position */
+        font-size: 14px; /* Reduced link size */
+    }
+
+} 
+     
+
+
+    /* Adjust container spacing */
+    .events-container {
+        margin-top: 20px;
+        padding-left: 60px;
+        padding-top: 20px;
+    }
+
+    /* Update heading position */
+    h2 {
+        padding-left: 60px;
+        margin-top: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Adjust add event button */
+    .add-event-button {
+        position: fixed;
+        bottom: 20px;
+        right: 50px;
+        top: auto;
+        left: auto;
+    }
+
+    /* View details link styling for tablet */
+    .event-info a {
+        bottom: 10px;
+        left: 10px;
+        font-size: 14px;
+        color: #fff; /* Make sure the text is visible */
+        background-color: rgba(90, 62, 43, 0.8); /* Semi-transparent background */
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+        display: block; /* Ensure the link is always visible */
+        z-index: 3; /* Keep it above other elements */
+    }
+
+    .event-info a:hover {
+        background-color: rgba(123, 99, 77, 0.9);
+        text-decoration: none;
+    }
+
+    /* Adjust event card for better visibility */
+    .event-card {
+        height: 270px; /* Slightly taller to accommodate the view details link */
+    }
+
+    .event-info {
+        padding-bottom: 40px; /* Add more padding at bottom to prevent overlap */
+    }
+
+    /* Enhanced view details link styling for tablet */
+    .event-info {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.4) 70%,
+            rgba(0, 0, 0, 0.6) 100%
+        );
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .event-card {
+        height: 280px;
+        position: relative;
+        overflow: visible; /* Changed from hidden */
+    }
+
+    .event-info a {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        font-size: 16px;
+        color: #ffffff;
+        background-color: rgba(90, 62, 43, 0.7); /* More transparent background */
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        z-index: 10;
+        width: auto;
+        text-align: center;
+        backdrop-filter: blur(2px); /* Adds a slight blur effect behind the button */
+    }
+
+    .event-info a:hover {
+        background-color: rgba(123, 99, 77, 0.9);
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+    }
+
+    /* Ensure text content is visible */
+    .event-info h2 {
+        color: #ffffff;
+        font-size: 18px;
+        margin-bottom: 40px; /* Increased space for the link */
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* Adjust upcoming events heading spacing */
+    h2 {
+        padding-left: 60px; /* Reduced from 120px */
+        margin-top: 50px; /* Reduced from 200px */
+        position: relative;
+        z-index: 0;
+        clear: both;
+    }
+
+    .events-container {
+        padding-left: 60px; /* Reduced from 100px */
+        margin-top: 30px; /* Reduced from 120px */
+        clear: both;
+    }
+
+    .events-header {
+        margin-bottom: 150px;
+        position: relative;
+        z-index: 2;
+    }
+
+    
+
+/* For 2560px and below */
+@media (max-width: 2560px) {
+    .body {
+        margin: 0; /* Removes default margin */
+        padding: 0; /* Removes default padding */
+        overflow-x: hidden;
+    }
+    .search-container {
+        position: relative;
+        width: 25%;
+        right: 600px;
+        top: -100px;
+        margin: 40px auto;
+    }
+
+    #searchInput {
+        width: 40%;
+        padding: 15px 30px 15px 15px;
+        font-size: 18px;
+    }
+
+    .search-icon {
+        right: 170px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+    }
+}
+ /* Adjust add event button */
+ .add-event-button {
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    top: auto;
+    left: auto;
+}
+
+/* Mobile styles for 425px and below */
+@media (max-width: 425px) {
+    .search-container {
+        width: 80%; /* Adjust width to fit smaller screens */
+        right: 10px; /* Adjust position */
+        top: 10px; /* Move below the header */
+        margin: 20px auto; /* Center the search bar */
+    }
+
+    #searchInput {
+        width: 100%; /* Full width for input */
+        padding: 10px; /* Adjust padding */
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .search-icon {
+        right: -10px; /* Adjust position */
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .events-header {
+        margin-bottom: 60px; /* Add space below the header */
+    }
+
+    #eventForm {
+        width: 70%; /* Reduced width */
+        padding: 15px; /* Slightly reduced padding */
+        max-height: 80vh; /* Reduced height */
+        overflow-y: auto;
+    }
+
+    #eventForm form {
+        width: 100%;
+        gap: 10px; /* Add some spacing between form elements */
+    }
+
+    #eventForm input[type="text"],
+    #eventForm input[type="date"],
+    #eventForm input[type="file"] {
+    #eventForm input[type="location"] {   
+
+        width: 90%; /* Slightly reduced width for inputs */
+        padding: 8px; /* Reduced padding */
+        margin-bottom: 10px; /* Reduced margin */
+        font-size: 14px; /* Slightly smaller font */
+    }
+
+    #eventForm button {
+        width: 90%; /* Match input width */
+        padding: 10px; /* Reduced padding */
+        font-size: 14px;
+    }
+
+    /* Adjust modal for event form */
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .modal-content img {
+        max-width: 100%;
+    }
+
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+    }
+
+    .confirm-button, .cancel-button {
+        width: 100%; /* Full width buttons */
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 375px) {
+    .search-container {
+        width: 80%; /* Adjust width to fit smaller screens */
+        right: 10px; /* Adjust position */
+        top: 10px; /* Move below the header */
+        margin: 20px auto; /* Center the search bar */
+        top: -20px;
+    }
+    #searchInput {
+        width: 100%; /* Full width for input */
+        padding: 10px; /* Adjust padding */
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .search-icon {
+        right: -10px; /* Adjust position */
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .events-header {
+        margin-bottom: 60px; /* Add space below the header */
+    }
+    .add-event-button{
+        bottom: 50px;
+        right: 10px;
+    }
+}
+
+.event-location {
+    color: #666;
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.event-location i {
+    margin-right: 5px;
+    color: #e74c3c;
+}
+
+#modalEventLocation {
+    color: #666;
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+}
+
+
+
+

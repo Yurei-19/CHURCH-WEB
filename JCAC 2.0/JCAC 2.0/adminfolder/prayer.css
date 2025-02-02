@@ -1,0 +1,844 @@
+.prayer-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.prayer-container h1 {
+    color: #5a3e2b;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.table-container {
+    overflow-x: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #5a3e2b;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.delete-btn {
+    background-color: transparent;
+    color: #ff4444;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn:hover {
+    color: #cc0000;
+    transform: scale(1.1);
+}
+
+.delete-btn i {
+    font-size: 18px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 10px;
+    }
+} 
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+@keyframes modalPop {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Prayer text styles */
+.prayer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.preview-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+    color: #333;
+}
+
+.modal h2 {
+    color: #5a3e2b;
+    margin-bottom: 20px;
+    padding-right: 40px;
+}
+
+.modal p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 20px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Style the scrollbar for better appearance */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Read More Button styles */
+.read-more-btn {
+    background-color: #5a3e2b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.read-more-btn:hover {
+    background-color: #7b634d;
+}
+
+/* Filter Section Styles */
+.filter-section {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 600px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 30px 8px 35px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #666;
+}
+
+.search-box input::placeholder {
+    color: #999;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 14px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0;
+}
+
+.filter-btn {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #666;
+    cursor: pointer;
+    font-size: 13px;
+    margin: 0;
+    transition: background-color 0.2s;
+}
+
+/* Remove border radius from all buttons */
+.filter-btn {
+    border-radius: 0;
+}
+
+/* Add border radius only to first and last buttons */
+.filter-btn:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.filter-btn:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+/* Remove double borders between buttons */
+.filter-btn:not(:first-child) {
+    border-left: none;
+}
+
+.filter-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.filter-btn.active {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Table cell styles */
+td {
+    max-width: 200px;
+    white-space: normal;
+    word-wrap: break-word;
+    vertical-align: top;
+}
+
+/* Adjust other columns */
+td:nth-child(2),
+td:nth-child(3),
+td:nth-child(4) {
+    max-width: 150px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/* Actions column */
+td:last-child {
+    width: 80px;
+    min-width: 80px;
+}
+
+/* Name column */
+td:first-child {
+    min-width: 120px;
+    max-width: 150px;
+}
+
+/* Delete Confirmation Modal */
+#deleteConfirmModal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    width: 400px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: none !important;
+    margin: auto;
+    animation: modalPop 0.2s ease-out;
+}
+
+.delete-modal-content h2 {
+    color: #dc3545;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.delete-modal-content p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 0 20px;
+}
+
+.delete-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.delete-confirm-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: #dc3545;
+    color: white;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.delete-cancel-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: #6c757d;
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.delete-confirm-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+
+.delete-cancel-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+}
+
+/* Warning icon */
+.warning-icon {
+    color: #dc3545;
+    font-size: 60px;
+    margin-bottom: 25px;
+    display: block;
+    animation: warningBounce 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalPop {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes warningBounce {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2100;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideInOut 2s ease-in-out forwards;
+}
+
+.notification i {
+    font-size: 20px;
+}
+
+.notification.success {
+    background-color: #28a745;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
+@keyframes slideInOut {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    10% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    90% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.accept-btn, .reject-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.accept-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.accept-btn:hover {
+    background-color: #218838;
+}
+
+.reject-btn:hover {
+    background-color: #c82333;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.accept-confirm-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: #28a745;
+    color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.accept-confirm-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* Add this new class for the modal when it's shown */
+#confirmModal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+#confirmModal.show {
+    display: flex;
+}
+
+/* Add these styles at the end of your CSS file */
+
+@media screen and (max-width: 425px) {
+    .prayer-container {
+        padding: 10px;
+    }
+
+    /* Hide regular table header */
+    thead {
+        display: none;
+    }
+
+    /* Convert table rows to cards */
+    tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Basic cell styling */
+    td {
+        display: flex;
+        position: relative;
+        padding: 10px 10px 10px 140px !important;
+        min-height: 50px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        border: none;
+        color: #333;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        align-items: center; /* Center content vertically */
+    }
+
+    /* Label styling */
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 130px;
+        padding: 10px;
+        color: #5a3e2b;
+        font-weight: bold;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        z-index: 1;
+    }
+
+    /* Specific styles for adminrequest.php */
+    td[data-label="Username"],
+    td[data-label="Status"],
+    td[data-label="Actions"] {
+        display: flex;
+        align-items: center;
+        min-height: 50px;
+        padding: 10px 10px 10px 140px !important;
+    }
+
+    /* Status badge adjustment */
+    td[data-label="Status"] {
+        padding-left: 140px !important;
+    }
+
+    .status-badge {
+        margin: 0;
+    }
+
+    /* Action buttons container */
+    td[data-label="Actions"] {
+        padding-left: 140px !important;
+        gap: 10px;
+        justify-content: flex-start;
+        border-bottom: none;
+    }
+
+    /* Style for accept and reject buttons */
+    .accept-btn, .reject-btn {
+        padding: 8px 15px;
+        font-size: 13px;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        margin: 0;
+    }
+
+    /* Make cards more distinct */
+    tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Adjust delete modal for mobile */
+    .delete-modal-content {
+        width: 90%;
+        max-width: 320px;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .delete-modal-content h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .delete-modal-content p {
+        font-size: 14px;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    .warning-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .delete-modal-buttons {
+        gap: 10px;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .delete-confirm-btn,
+    .delete-cancel-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Adjust confirmation modal */
+    #confirmModal .delete-modal-content {
+        width: 90%;
+        max-width: 320px;
+        padding: 20px;
+    }
+
+    #confirmModal .delete-modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #confirmModal .delete-confirm-btn,
+    #confirmModal .delete-cancel-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Enhanced Logout Modal Styles for 425px */
+    .logout-modal {
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logout-modal-content {
+        background-color: white;
+        width: 85%;
+        max-width: 280px;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        animation: modalPop 0.3s ease-out;
+        position: relative;
+    }
+
+    .logout-icon {
+        color: #5a3e2b;
+        font-size: 35px;
+        margin: 10px 0;
+        animation: iconBounce 0.5s ease;
+    }
+
+    .logout-modal-content h2 {
+        color: #5a3e2b;
+        font-size: 16px;
+        margin: 10px 0;
+        font-weight: 600;
+    }
+
+    .logout-modal-content p {
+        color: #666;
+        font-size: 14px;
+        margin: 15px 0;
+        line-height: 1.4;
+        padding: 0 10px;
+    }
+
+    .logout-modal-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .logout-confirm-btn {
+        background-color: #5a3e2b;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .logout-cancel-btn {
+        background-color: #f0f0f0;
+        color: #666;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .logout-confirm-btn:hover {
+        background-color: #4a3323;
+    }
+
+    .logout-cancel-btn:hover {
+        background-color: #e4e4e4;
+    }
+
+    @keyframes iconBounce {
+        0% {
+            transform: scale(0.3);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+}
+ 
